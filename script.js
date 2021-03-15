@@ -122,11 +122,14 @@ function resizeFinalResult () {
 
     resultContent.style.cssText = "font-size: inherit";
 
+
 }
 
 function getFinalResult () {
-    const correctedParameter = getCorrectParameter()
-    const operation = calculateFunc(correctedParameter)
+
+    let correctedParameter = getCorrectParameter()
+    let operation = calculateFunc(correctedParameter)
+
     resultContent.textContent = operation;
 
 }
@@ -205,25 +208,28 @@ function calculateFunc(arr) {
     }
 
     let final = (arr[0]) / 10;
-    let str = final.toString();
+    
+    final = final.toString();
 
-    if (str.indexOf(".") >= 0) {
+    if (final.indexOf(".") >= 0) {
         
-        let afterDot = str.slice( str.indexOf(".") + 1, str.length );
-        let beforeDot = str.slice( 0, str.indexOf("."));
+        let afterDot = final.slice( final.indexOf(".") + 1, final.length );
+        let beforeDot = final.slice( 0, final.indexOf("."));
 
-        if (str.indexOf("e") >= 0 ) {
+        if (final.indexOf("e") >= 0 ) {
 
-            final = final.toExponential(6);
+            final = parseFloat(final).toExponential(6);
+   
+
             
             
-        } else if (afterDot.length >= 4) {
+        } else if (afterDot.length >= 6) {
 
-            afterDot = afterDot.slice( 0, 4);
+            afterDot = afterDot.slice( 0, 6);
             final = beforeDot.concat(".", afterDot);
 
             
-        } else if (afterDot.length < 4) {
+        } else if (afterDot.length < 6) {
             afterDot = afterDot.slice( 0, afterDot.length);
             final = beforeDot.concat(".", afterDot);
 
@@ -231,15 +237,18 @@ function calculateFunc(arr) {
 
     }
 
-    if (str.length >= 12) {
+    if (final.length >= 12) {
+        final = parseFloat(final).toExponential(6);
 
-        final = final.toExponential(6);
+
 
     }
-
+    
     return final;
 
 }
+
+
 
 
 /*---------------------------------------*/
