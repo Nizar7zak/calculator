@@ -187,8 +187,6 @@ function calculateFunc(arr) {
     }
 
     for (let i = 0; i < arr.length; i++) {
-        
-
 
         if (arr[i] === "-" ) {
 
@@ -210,21 +208,32 @@ function calculateFunc(arr) {
     let str = final.toString();
 
     if (str.indexOf(".") >= 0) {
-
+        
         let afterDot = str.slice( str.indexOf(".") + 1, str.length );
         let beforeDot = str.slice( 0, str.indexOf("."));
 
+        if (str.indexOf("e") >= 0 ) {
 
-        if (afterDot.length >= 4) {
+            final = final.toExponential(6);
+            
+            
+        } else if (afterDot.length >= 4) {
 
             afterDot = afterDot.slice( 0, 4);
+            final = beforeDot.concat(".", afterDot);
+
             
         } else if (afterDot.length < 4) {
             afterDot = afterDot.slice( 0, afterDot.length);
+            final = beforeDot.concat(".", afterDot);
 
         }
 
-        final = beforeDot.concat(".", afterDot);
+    }
+
+    if (str.length >= 12) {
+
+        final = final.toExponential(6);
 
     }
 
