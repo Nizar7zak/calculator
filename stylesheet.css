@@ -48,13 +48,12 @@ body {
     border-radius: 12px;
 }
 .current{
-    width: 185px;
+    width: 187px;
     font-size: 70%;
     height: 100px;
     height: 26px;
     overflow: hidden;
-    position: relative;
-    left: -120px;
+    align-self: flex-start;
 }
 
 .operate, 
